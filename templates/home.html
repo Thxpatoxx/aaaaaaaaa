@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div id="mytable">
+  {% for post in posts %}
+    {% if post.tipo == 'PRIVADO' %}
+    <div id="b" style="width: 30%;margin-left: 2%;float: left;" class="card mb-3">
+        <h3 class="card-header" style="text-align: center"> {{post.estado}} </h3>
+        <div class="card-body">
+          <h5 class="card-title">{{post.dueno.nombre_completo}}</h5>
+          <h6 class="card-subtitle text-muted">${{post.precio_hora}} pesos por hora.</h6>
+        </div>
+        {% if post.estado == 'DISPONIBLE' %}
+          <img style="height: 200px; width: 100%; display: block;" src="https://image.flaticon.com/icons/svg/214/214353.svg" alt="Card image">
+        {% else %}
+          <img style="height: 200px; width: 100%; display: block;" src="https://image.flaticon.com/icons/svg/214/214280.svg" alt="Card image">
+        {% endif %}
+        <div class="card-body">
+          <p class="card-text">Calle: {{post.direccion}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Numero: {{post.numero}} </li>
+          <li class="list-group-item">Letra: {{post.letra}}</li>
+          <li class="list-group-item">Planta: {{post.planta}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="{% url 'detest' pk=post.pk %}" class="card-link"><center>Arrendar</center></a>
+        </div>
+        <div class="card-footer text-muted">
+          Horario: {{post.hora_min}} Hasta {{post.hora_max}}
+        </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

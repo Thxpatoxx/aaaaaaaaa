@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Estacionamientos</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/varios.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'inicio' %}">Estacionamientos Privados<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'publico' %}">Estacionamientos Publicos<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'comollegar' %}">¿ Como llegar ?</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    <div style="margin-right: 9px" class="log">
+    {% if user.is_authenticated %}
+        Hola {{ user.username }} !
+        <p><a href="{% url 'logout' %}">Salir Usuario</a></p>
+    {% else %}
+        <p>Aun no te registras!!</p>
+        <a href="{% url 'login' %}">Iniciar Sesión</a>|
+        <a href="{% url 'signup' %}">Registrarte</a>
+    {% endif %}
+    </div>
+    <br>
+    <div style="margin-left: 20%;width: 60%; text-align: center;border-radius: 9px 9px 9px 9px;-moz-border-radius: 9px 9px 9px 9px;-webkit-border-radius: 9px 9px 9px 9px;border: 3px solid #ffffff;" >
+        <h2>REGISTRO</h2>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Sign up</button>
+        </form>
+
+    </div>
+    <style>
+    select{
+        width: 90%;
+        font-size: 22px;
+        
+    }
+    label{
+        width: 40%;
+        font-size: 22px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    input{
+        width: 90%;
+        font-size: 22px;
+    }
+    </style>
+</body>

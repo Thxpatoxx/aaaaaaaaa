@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card text-white bg-success mb-3" style="width: 80%;margin-left: 10%">
+        <div class="card-header"> {{post.estado}} </div>
+        <div class="card-body">
+            <h1>Dirección: {{post.direccion}}</h1>
+            <hr>
+            <h2>Precio: ${{post.precio_hora}} pesos por Hora.</h2>
+            <hr>
+            <h5>Letra: {{post.letra}} | Numero: {{post.numero}}</h5>
+            <h5>Horario Disponible: Desde {{post.hora_min}} hasta {{post.hora_max}}</h5>
+            <hr>
+            <h4>Dueño:</h4>
+            <h5>Usuario: {{post.dueno.username}}</h5>
+            <h5>Rut: {{post.dueno.rut}} </h5>
+            <h5>Nombre: {{post.dueno.nombre_completo}}</h5>
+            <br>
+            {% if post.estado == 'DISPONIBLE' %}
+                <a href="{% url 'arrendar' pk=post.pk %}"><button type="button" class="btn btn-primary btn-lg btn-block">Arrendar</button></a>
+            {% else %} 
+                <a href="{% url 'arrendar' pk=post.pk %}"><button type="button" class="btn btn-primary btn-lg btn-block">Desocupar</button></a>
+            {% endif %} 
+        </div>
+    </div>
+{% endblock %}
